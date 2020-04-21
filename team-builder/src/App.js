@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import Form from './components/Form'
+import TeamMember from './components/TeamMember'
 import './App.css';
+
+
+const initialFriendsList = [
+  // 👉 the shape of the actual friend object from API
+  {
+    name: 'Michael',
+    email: 'michael@michael.com',
+    role: 'person'
+  },
+]
 
 
 // the shape of the state that drives the form
@@ -12,7 +23,7 @@ const initialFormValues = {
 }
 
 function App() {
-  const [friends, setFriends] = useState(initialFormValues)
+  const [friends, setFriends] = useState(initialFriendsList)
 
   // STEP 1 - WE NEED TO HOLD ALL VALUES OF THE FORM!
   const [formValues, setFormValues] = useState(initialFormValues)
@@ -56,13 +67,13 @@ function App() {
   return (
     <div className="App">
       <header><h1>List o'Team Members</h1></header>
-      {/* {
+      {
         friends.map(friend => {
           return (
-            <Friend key={friend.id} />
+            <TeamMember key={friend.id} details={friend}/>
           )
         })
-      } */}
+      }
 
       <Form
         // STEP 2 - FORM WANTS ITS FOOD!
@@ -70,9 +81,10 @@ function App() {
         // to see what props it expects
         values={formValues}
         onInputChange={onInputChange}
+        onSubmit={onSubmit}
       />
     </div>
   );
 }
-//testing
+
 export default App;
