@@ -5,7 +5,7 @@ import TeamMember from './components/TeamMember'
 import './App.css';
 
 
-const initialFriendsList = [
+const initialMemberslist = [
   // 👉 the shape of the actual friend object from API
   {
     name: 'Michael',
@@ -23,7 +23,7 @@ const initialFormValues = {
 }
 
 function App() {
-  const [friends, setFriends] = useState(initialFriendsList)
+  const [teamMembers, setTeamMembers] = useState(initialMemberslist)
 
   // STEP 1 - WE NEED TO HOLD ALL VALUES OF THE FORM!
   const [formValues, setFormValues] = useState(initialFormValues)
@@ -52,14 +52,13 @@ function App() {
     // a) don't allow the browser to reload using .preventDefault()!
     evt.preventDefault()
 
-    const newFriend = {
-      //id: uuid()
+    const newMember = {
       name: formValues.name,
       email: formValues.email,
       role: formValues.role
     }
     // c) update the list of Team Members in state with the new Team Member
-    setFriends([ ...friends, newFriend ])
+    setTeamMembers([ ...teamMembers, newMember ])
     // d) optionally clear the form
     setFormValues(initialFormValues)
   }
@@ -68,9 +67,9 @@ function App() {
     <div className="App">
       <header><h1>List o'Team Members</h1></header>
       {
-        friends.map(friend => {
+        teamMembers.map(teamMember => {
           return (
-            <TeamMember key={friend.id} details={friend}/>
+            <TeamMember key={teamMember.id} details={teamMember}/>
           )
         })
       }
